@@ -1,7 +1,9 @@
 #!/usr/bin/env python3.4
 
 import os
+import sys
 import shutil
+from subprocess import call
 
 
 class start(object):
@@ -35,36 +37,59 @@ class start(object):
                        self.history_term +
                        self.history_files)
 
-    def delete_from_list(self, list):
-        ndirs, ddirs, nfiles, dfiles = 0, 0, 0, 0
-        for i in list:
-            if os.path.isdir(self.userdir + i) is True:
-                ndirs += 1
-                print("\033[0m[\033[92m*\033[0m] : %s\033[92m%s\033[0m"
-                      % (self.userdir, i))
-                try:
-                    shutil.rmtree(self.userdir + i)
-                    ddirs += 1
-                except Exception as e:
-                    print("[\033[91mE\033[0m] : %s\033[91m%s\033[0m\n %s" %
-                          (self.userdir, i, e))
+        # self.external = ["/usr/bin/xclip -i /dev/null"]
 
-            elif os.path.isfile(self.userdir + i) is True:
-                nfiles += 1
-                print("\033[0m[\033[92m*\033[0m] : %s\033[92m%s\033[0m"
-                      % (self.userdir, i))
-                try:
-                    os.remove(self.userdir + i)
-                    dfiles += 1
-                except Exception as e:
-                    print("[\033[91mE\033[0m] : %s\033[91m%s\033[0m\n %s" %
-                          (self.userdir, i, e))
-            else:
-                    print("[\033[91m-\033[0m] : %s\033[91m%s\033[0m" %
-                          (self.userdir, i))
+    def delete_from_list(self, list):
+
+        ndirs, ddirs, nfiles, dfiles = 0, 0, 0, 0
+        get_yes = input(" Continue? Y/n: ")
+
+        if get_yes is not "Y":
+
+            for i in list:
+
+                if os.path.isdir(self.userdir + i) is True:
+                    ndirs += 1
+                    print("\033[0m[\033[92m*\033[0m] : %s\033[92m%s\033[0m"
+                          % (self.userdir, i))
+
+                    try:
+                        shutil.rmtree(self.userdir + i)
+                        ddirs += 1
+
+                    except Exception as e:
+                        print("[\033[91mE\033[0m] : %s\033[91m%s\033[0m\n %s" %
+                              (self.userdir, i, e))
+
+                elif os.path.isfile(self.userdir + i) is True:
+                    nfiles += 1
+                    print("\033[0m[\033[92m*\033[0m] : %s\033[92m%s\033[0m"
+                          % (self.userdir, i))
+
+                    try:
+                        os.remove(self.userdir + i)
+                        dfiles += 1
+
+                    except Exception as e:
+                        print("[\033[91mE\033[0m] : %s\033[91m%s\033[0m\n %s" %
+                              (self.userdir, i, e))
+                else:
+                    print("no")
+                    sys.exit()
+                    # print("[\033[91m-\033[0m] : %s\033[91m%s\033[0m" %
+                    #       (self.userdir, i))
+        else:
+            print("Exit...")
+            exit
+
         print("\n Results:")
         print("  %s/%s directories\n  %s/%s files"
-              % (dfiles, nfiles, ddirs, ndirs))
+              % (ddirs, ndirs, dfiles, nfiles))
+
+    def run_external(self):
+        print("\n\033[0mStarting...")
+        print(" \033[92mxclip \033[0m(\033[91mX cliboard cleaning\033[0m)")
+        call(["/usr/bin/xclip", "-i", "/dev/null"])
 
 s = start()
 
@@ -73,6 +98,7 @@ print("\033[92m       __                   \033[91m             ")
 print("\033[92m.----.|  |.-----.---.-.-----\033[91m.--.--.-----.")
 print("\033[92m|  __||  ||  -__|  _  |     \033[91m|  |  |  _  |")
 print("\033[92m|____||__||_____|___._|__|__\033[91m|_____|   __|")
-print("\033[00m                github.com/lemones\033[91m|__|\n\n")
+print("\033[00m                github.com/lemones\033[91m|__|\033[0m\n\n")
 
 s.delete_from_list(s.merged)
+s.run_external()
