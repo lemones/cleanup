@@ -44,7 +44,7 @@ class start(object):
         ndirs, ddirs, nfiles, dfiles = 0, 0, 0, 0
         get_yes = input(" Continue? Y/n: ")
 
-        if get_yes is not "Y":
+        if get_yes is "Y":
 
             for i in list:
 
@@ -74,13 +74,11 @@ class start(object):
                         print("[\033[91mE\033[0m] : %s\033[91m%s\033[0m\n %s" %
                               (self.userdir, i, e))
                 else:
-                    print("no")
-                    sys.exit()
+                    pass
                     # print("[\033[91m-\033[0m] : %s\033[91m%s\033[0m" %
                     #       (self.userdir, i))
         else:
-            print("Exit...")
-            exit
+            sys.exit("Exit...")
 
         print("\n Results:")
         print("  %s/%s directories\n  %s/%s files"
