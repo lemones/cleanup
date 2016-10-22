@@ -97,7 +97,7 @@ class start(object):
             print("\n\033[0mStarting...")
 
         else:
-            print("\n\033[91mNo external programs found...")
+            print("\n\033[91mNo external programs found...\033[0m")
 
 s = start()
 
@@ -109,3 +109,5 @@ print("\033[00m                github.com/lemones\033[91m|__|\033[0m\n\n")
 
 s.delete_from_list(s.merged)
 s.run_external()
+
+print("Done...")
