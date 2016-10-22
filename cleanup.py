@@ -86,8 +86,9 @@ class start(object):
 
     def run_external(self):
         print("\n\033[0mStarting...")
-        print(" \033[92mxclip \033[0m(\033[91mX cliboard cleaning\033[0m)")
+        print(" \033[92mxclip \033[0m(\033[91mCliboard cleaning\033[0m)")
         call(["/usr/bin/xclip", "-i", "/dev/null"])
+        call(["/usr/bin/xclip", "-selection clipboard", "/dev/null"])
 
 s = start()
 
