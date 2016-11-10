@@ -85,16 +85,18 @@ class start(object):
               % (ddirs, ndirs, dfiles, nfiles))
 
     def run_external(self):
+
         ext_aviable = 0
+        print("\n\033[0mStarting external commands...")
 
         if os.path.isfile("/usr/bin/xclip"):
             ext_aviable += 1
-            print(" \033[92mxclip \033[0m(\033[91mCliboard cleaning\033[0m)")
+            print("\n \033[92mxclip \033[0m(\033[91mCliboard cleaning\033[0m)")
             call(["/usr/bin/xclip", "-i", "/dev/null"])
             call(["/usr/bin/xclip", "-selection", "clipboard", "/dev/null"])
 
         if ext_aviable > 0:
-            print("\n\033[0mStarting...")
+            print("\n\033[0mDone running %s commands..." % ext_aviable)
 
         else:
             print("\n\033[91mNo external programs found...\033[0m")
@@ -109,5 +111,3 @@ print("\033[00m                github.com/lemones\033[91m|__|\033[0m\n\n")
 
 s.delete_from_list(s.merged)
 s.run_external()
-
-print("Done...")
