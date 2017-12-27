@@ -1,4 +1,4 @@
-#!/usr/bin/env python3.4
+#!/usr/bin/python3
 
 import os
 import sys
@@ -37,26 +37,23 @@ class start(object):
                        self.history_term +
                        self.history_files)
 
-        # self.external = ["/usr/bin/xclip -i /dev/null"]
+        self.external = ["/usr/bin/xclip -i /dev/null"]
 
     def delete_from_list(self, list):
 
         ndirs, ddirs, nfiles, dfiles = 0, 0, 0, 0
-        get_yes = input(" Continue? Y/n: ")
+        get_yes = input("Continue?\n Y/n: ")
 
         if get_yes is "Y":
 
             for i in list:
-
                 if os.path.isdir(self.userdir + i) is True:
                     ndirs += 1
                     print("\033[0m[\033[92m*\033[0m] : %s\033[92m%s\033[0m"
                           % (self.userdir, i))
-
                     try:
                         shutil.rmtree(self.userdir + i)
                         ddirs += 1
-
                     except Exception as e:
                         print("[\033[91mE\033[0m] : %s\033[91m%s\033[0m\n %s" %
                               (self.userdir, i, e))
@@ -65,23 +62,21 @@ class start(object):
                     nfiles += 1
                     print("\033[0m[\033[92m*\033[0m] : %s\033[92m%s\033[0m"
                           % (self.userdir, i))
-
                     try:
                         os.remove(self.userdir + i)
                         dfiles += 1
-
                     except Exception as e:
                         print("[\033[91mE\033[0m] : %s\033[91m%s\033[0m\n %s" %
                               (self.userdir, i, e))
                 else:
                     pass
-                    # print("[\033[91m-\033[0m] : %s\033[91m%s\033[0m" %
-                    #       (self.userdir, i))
+                    print("[\033[91m-\033[0m] : %s\033[91m%s\033[0m" %
+                          (self.userdir, i))
         else:
             sys.exit("Exit...")
 
         print("\n Results:")
-        print("  %s/%s directories\n  %s/%s files"
+        print("  %s/%s directories cleaned\n  %s/%s files cleaned"
               % (ddirs, ndirs, dfiles, nfiles))
 
     def run_external(self):
@@ -100,6 +95,7 @@ class start(object):
 
         else:
             print("\n\033[91mNo external programs found...\033[0m")
+
 
 s = start()
 
