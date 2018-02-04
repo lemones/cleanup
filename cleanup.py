@@ -17,12 +17,17 @@ class start(object):
                                "/.cache/mozilla/firefox/",
                                "/.cache/vivaldi/",
                                "/.cache/vivaldi-snapshot",
-                               "/.cache/opera/"]
+                               "/.cache/opera/",
+                               "/.cache/qutebrowser/"]
 
         self.cache_other = ["/.cache/shotwell/",
                             "/.cache/media-art/",
                             "/.cache/thumbnails/",
-                            "/.cache/vlc/"]
+                            "/.cache/vlc/",
+                            "/.cache/ImageMagick/",
+                            "/.cache/youtube-dl/",
+                            "/.cache/youtube-viewer/",
+                            "/.cache/dmenu_run"]
 
         self.trash_folder = ["/.local/share/Trash/"]
 
